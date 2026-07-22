@@ -69,4 +69,37 @@ describe('Gameboard Class', () => {
     board.recieveAttack(0, 0);
     expect(board.board[0][0]).toBe('h');
   });
+
+  it('Should not recieve attack if already hit', () => {
+    let ship = new Ship(3);
+    board.place(ship, 0, 0, (horizontal = true));
+    board.recieveAttack(0, 0);
+    expect(board.recieveAttack()).toThrow();
+  });
+
+  it('Should keep track of missed attacks', () => {
+    let ship = new Ship(3);
+    board.place(ship, 0, 0, (horizontal = true));
+    board.recieveAttack(0, 0);
+    board.recieveAttack(1, 0);
+    expect(board.board[1][0]).toBe('m');
+  });
+
+  it('Should know when all ships are sunk', () => {
+    let ship = new Ship(3);
+    board.place(ship, 0, 0, (horizontal = true));
+    board.recieveAttack(0, 0);
+    board.recieveAttack(0, 1);
+    board.recieveAttack(0, 2);
+    expect(board.hasShips()).toBe(false);
+  });
+
+  it('Should know when ships are remaining', () => {
+    let ship = new Ship(3);
+    board.place(ship, 0, 0, (horizontal = true));
+    board.recieveAttack(1, 0);
+    board.recieveAttack(2, 1);
+    board.recieveAttack(3, 2);
+    expect(board.hasShips()).toBe(true);
+  });
 });
