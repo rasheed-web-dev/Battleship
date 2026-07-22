@@ -48,12 +48,12 @@ describe('Gameboard Class', () => {
     ).toBe(true);
   });
 
-  it('Should not place a length 2 ship at 7 0 horizontally', () => {
+  it('Should not place a length 2 ship at 0 7 horizontally', () => {
     let ship = new Ship(2);
     expect(board.place(ship, 0, 7, (horizontal = true))).toThrow();
   });
 
-  it('Should not place a length 2 ship at 0 7 vertically', () => {
+  it('Should not place a length 2 ship at 7 0 vertically', () => {
     let ship = new Ship(2);
     expect(board.place(ship, 7, 0, (horizontal = false))).toThrow();
   });
