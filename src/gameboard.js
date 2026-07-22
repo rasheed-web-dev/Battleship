@@ -52,6 +52,24 @@ class Gameboard {
       this.board[y][x] = 'm';
     }
   }
+
+  hasShips() {
+    if (this.containsValue('s')) {
+      return true;
+    }
+    return false;
+  }
+
+  containsValue(value) {
+    for (let y = 0; y < this.board.length; y++) {
+      for (let x = 0; x < this.board[y].length; x++) {
+        if (this.board[y][x] === value) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 }
 
 export { Gameboard };
