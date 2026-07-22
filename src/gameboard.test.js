@@ -51,17 +51,17 @@ describe('Gameboard Class', () => {
     ).toBe(true);
   });
 
-  it('Should not place a length 2 ship at 0 7 horizontally', () => {
+  it('Should not place a length 2 ship at 0 6 horizontally', () => {
     let ship = new Ship(2);
     expect(() => {
-      board.place(ship, 0, 7, true);
+      board.place(ship, 0, 6, true);
     }).toThrow('Invalid Position');
   });
 
-  it('Should not place a length 2 ship at 7 0 vertically', () => {
+  it('Should not place a length 2 ship at 6 0 vertically', () => {
     let ship = new Ship(2);
     expect(() => {
-      board.place(ship, 7, 0, false);
+      board.place(ship, 6, 0, false);
     }).toThrow('Invalid Position');
   });
 
