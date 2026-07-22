@@ -24,7 +24,8 @@ describe('Gameboard Class', () => {
     expect(
       board.board[0][0] == 's' &&
         board.board[0][1] == 's' &&
-        board.board[0][2] == 's'
+        board.board[0][2] == 's' &&
+        board.board[0][3] == 'e'
     ).toBe(true);
   });
 
@@ -34,7 +35,8 @@ describe('Gameboard Class', () => {
     expect(
       board.board[0][0] == 's' &&
         board.board[1][0] == 's' &&
-        board.board[2][0] == 's'
+        board.board[2][0] == 's' &&
+        board.board[3][0] == 'e'
     ).toBe(true);
   });
 
@@ -44,18 +46,23 @@ describe('Gameboard Class', () => {
     expect(
       board.board[1][1] == 's' &&
         board.board[1][2] == 's' &&
-        board.board[1][3] == 's'
+        board.board[1][3] == 's' &&
+        board.board[1][4] == 'e'
     ).toBe(true);
   });
 
   it('Should not place a length 2 ship at 0 7 horizontally', () => {
     let ship = new Ship(2);
-    expect(board.place(ship, 0, 7, (horizontal = true))).toThrow();
+    expect(() => {
+      board.place(ship, 0, 7, true);
+    }).toThrow('Invalid Position');
   });
 
   it('Should not place a length 2 ship at 7 0 vertically', () => {
     let ship = new Ship(2);
-    expect(board.place(ship, 7, 0, (horizontal = false))).toThrow();
+    expect(() => {
+      board.place(ship, 7, 0, false);
+    }).toThrow('Invalid Position');
   });
 
   it('Should recieve attack at 0 0 with no ship', () => {
@@ -74,7 +81,9 @@ describe('Gameboard Class', () => {
     let ship = new Ship(3);
     board.place(ship, 0, 0, (horizontal = true));
     board.recieveAttack(0, 0);
-    expect(board.recieveAttack()).toThrow();
+    expect(() => {
+      board.recieveAttack();
+    }).toThrow();
   });
 
   it('Should keep track of missed attacks', () => {
