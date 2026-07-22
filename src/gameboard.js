@@ -45,6 +45,12 @@ class Gameboard {
     if (this.board[y][x] == 'h' || this.board[y][x] == 'm') {
       throw new Error('Already attacked here');
     }
+
+    if (this.board[y][x] == 's') {
+      this.board[y][x] = 'h';
+    } else {
+      this.board[y][x] = 'm';
+    }
   }
 }
 
