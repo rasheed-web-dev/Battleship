@@ -1,3 +1,5 @@
+// in board: e is empty cell, s is ship cell, h is hit ship, m is missed hit
+
 class Gameboard {
   constructor(size = 7) {
     this.size = size;
@@ -9,14 +11,18 @@ class Gameboard {
   place(ship, y, x, horizontal = true) {
     let shipLen = ship.len;
 
-    let validPosition;
+    let isValidPosition;
     if (horizontal) {
-      validPosition = shipLen + x <= this.size ? true : false;
+      isValidPosition = shipLen + x <= this.size ? true : false;
     } else {
-      validPosition = shipLen + y <= this.size ? true : false;
+      isValidPosition = shipLen + y <= this.size ? true : false;
     }
 
-    if (!validPosition) {
+    if (this.board[y][x] == 's') {
+      isValidPosition = false;
+    }
+
+    if (!isValidPosition) {
       throw new Error('Invalid Position');
     }
 
@@ -32,6 +38,12 @@ class Gameboard {
         this.board[placement][x] = 's';
         placement++;
       }
+    }
+  }
+
+  recieveAttack(y, x) {
+    if (this.board[y][x] == 'h' || this.board[y][x] == 'm') {
+      throw new Error('Already attacked here');
     }
   }
 }
