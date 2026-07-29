@@ -11,6 +11,10 @@ class Gameboard {
   place(ship, y, x, horizontal = true) {
     let shipLen = ship.len;
 
+    if (!this.board[y]) {
+      throw new Error('Invalid Position: Row out of bounds');
+    }
+
     let isValidPosition;
     if (horizontal) {
       isValidPosition = shipLen + x <= this.size ? true : false;
@@ -18,12 +22,22 @@ class Gameboard {
       isValidPosition = shipLen + y <= this.size ? true : false;
     }
 
-    if (this.board[y][x] == 's') {
-      isValidPosition = false;
+    if (!isValidPosition) {
+      throw new Error('Invalid Position: Out of bounds');
     }
 
-    if (!isValidPosition) {
-      throw new Error('Invalid Position');
+    if (horizontal) {
+      for (let i = 0; i < shipLen; i++) {
+        if (this.board[y][x + i] === 's') {
+          throw new Error('Invalid Position: Overlaps another ship');
+        }
+      }
+    } else {
+      for (let i = 0; i < shipLen; i++) {
+        if (!this.board[y + i] || this.board[y + i][x] === 's') {
+          throw new Error('Invalid Position: Overlaps another ship');
+        }
+      }
     }
 
     if (horizontal) {
@@ -69,6 +83,17 @@ class Gameboard {
       }
     }
     return false;
+  }
+
+  printBoard() {
+    const header =
+      '   ' + Array.from({ length: this.size }, (_, i) => i).join(' ');
+    console.log(header);
+
+    this.board.forEach((row, rowIndex) => {
+      const formattedRow = row.map((cell) => (cell ? cell : '.')).join(' ');
+      console.log(`${rowIndex}  ${formattedRow}`);
+    });
   }
 }
 
