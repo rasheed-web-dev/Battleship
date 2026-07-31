@@ -51,6 +51,26 @@ function createGame() {
       return false; // Invalid move, try again
     }
   }
+
+  function cpuMakeMove() {
+    let validMove = false;
+    let y, x;
+
+    while (!validMove) {
+      y = Math.floor(Math.random() * player1.board.size);
+      x = Math.floor(Math.random() * player1.board.size);
+
+      if (
+        player1.board.board[y][x] !== 'h' &&
+        player1.board.board[y][x] !== 'm'
+      ) {
+        validMove = true;
+      }
+    }
+
+    console.log(`CPU attacks: ${y}, ${x}`);
+    attack(y, x);
+  }
 }
 
 createGame();
