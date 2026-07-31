@@ -2,7 +2,7 @@ import { Player } from './player.js';
 import { Gameboard } from './gameboard.js';
 import { Ship } from './ship.js';
 
-function createGame() {
+export function createGame() {
   let player1 = new Player();
   let player2 = new Player('cpu');
   let currentTurn = player1;
@@ -129,5 +129,3 @@ function createGame() {
     getState,
   };
 }
-
-createGame();
