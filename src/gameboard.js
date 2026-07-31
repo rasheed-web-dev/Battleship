@@ -62,8 +62,10 @@ class Gameboard {
 
     if (this.board[y][x] == 's') {
       this.board[y][x] = 'h';
+      return 'hit';
     } else {
       this.board[y][x] = 'm';
+      return 'miss';
     }
   }
 

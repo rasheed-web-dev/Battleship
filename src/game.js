@@ -5,6 +5,7 @@ import { Ship } from './ship.js';
 function createGame() {
   let player1 = new Player();
   let player2 = new Player('cpu');
+  let currentTurn = player1;
 
   const ships = {
     Carrier: 5,
@@ -33,6 +34,23 @@ function createGame() {
 
   setupGameBoards(player1.board, player2.board);
   player1.board.printBoard();
+
+  function attack(y, x) {
+    const enemyBoard = currentTurn === player1 ? player2.board : player1.board;
+
+    try {
+      const result = enemyBoard.receiveAttack(y, x);
+
+      if (result === 'miss') {
+        currentTurn = currentTurn === player1 ? player2 : player1;
+      }
+
+      return result;
+    } catch (error) {
+      console.log(error.message);
+      return false; // Invalid move, try again
+    }
+  }
 }
 
 createGame();
