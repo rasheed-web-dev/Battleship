@@ -21,7 +21,7 @@ export function createGame() {
     checkWinner();
 
     // If human missed and it's now the CPU's turn, let the CPU play
-    if (!gameOver && currentTurn === player2) {
+    while (!gameOver && currentTurn === player2) {
       cpuMakeMove();
       checkWinner();
     }
