@@ -6,6 +6,7 @@ function createGame() {
   let player1 = new Player();
   let player2 = new Player('cpu');
   let currentTurn = player1;
+  let gameOver = false;
 
   const ships = {
     Carrier: 5,
@@ -70,6 +71,18 @@ function createGame() {
 
     console.log(`CPU attacks: ${y}, ${x}`);
     attack(y, x);
+  }
+
+  function checkWinner() {
+    if (!player1.board.hasShips()) {
+      gameOver = true;
+      return 'cpu';
+    }
+    if (!player2.board.hasShips()) {
+      gameOver = true;
+      return 'player1';
+    }
+    return null;
   }
 }
 
