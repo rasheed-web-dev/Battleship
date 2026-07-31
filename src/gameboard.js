@@ -55,7 +55,7 @@ class Gameboard {
     }
   }
 
-  recieveAttack(y, x) {
+  receiveAttack(y, x) {
     if (this.board[y][x] == 'h' || this.board[y][x] == 'm') {
       throw new Error('Already attacked here');
     }
