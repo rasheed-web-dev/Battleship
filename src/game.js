@@ -103,6 +103,15 @@ function createGame() {
     }
     return null;
   }
+
+  function resetGame() {
+    player1 = new Player();
+    player2 = new Player('cpu');
+    currentTurn = player1;
+    gameOver = false;
+
+    setupGameBoards(player1.board, player2.board);
+  }
 }
 
 createGame();
