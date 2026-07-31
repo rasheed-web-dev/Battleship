@@ -112,6 +112,22 @@ function createGame() {
 
     setupGameBoards(player1.board, player2.board);
   }
+
+  function getState() {
+    return {
+      player1Board: player1.board.board,
+      player2Board: player2.board.board,
+      currentTurn: currentTurn.type,
+      isGameOver: gameOver,
+    };
+  }
+
+  return {
+    attack,
+    cpuMakeMove,
+    checkWinner,
+    getState,
+  };
 }
 
 createGame();
