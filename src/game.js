@@ -126,6 +126,8 @@ export function createGame() {
     attack,
     cpuMakeMove,
     checkWinner,
+    playRound,
+    resetGame,
     getState,
   };
 }
