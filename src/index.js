@@ -90,7 +90,8 @@ function handleAttack(e) {
 
 function updateStatus(state) {
   if (state.isGameOver) {
-    statusDisplay.textContent = `${state.currentTurn === 'human' ? 'CPU' : 'You'} Won!`;
+    statusDisplay.textContent =
+      state.currentTurn === 'human' ? 'You Won!' : 'CPU Won!';
   } else {
     statusDisplay.textContent =
       state.currentTurn === 'human' ? 'Your Turn' : 'Enemy Turn';
