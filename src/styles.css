@@ -103,10 +103,25 @@ body {
 .cell {
   background-color: #89b4fa;
   cursor: pointer;
+  border: 1px solid #5358a6;
 }
 
 .cell:hover {
-  background-color: #b4befe;
+  background-color: #cfd5fd;
+}
+
+.cell.miss {
+  background-color: #9ca3af; /* Gray for miss */
+  cursor: not-allowed;
+}
+
+.cell.hit {
+  background-color: #f87171; /* Red for hit */
+  cursor: not-allowed;
+}
+
+.cell.ship {
+  background-color: #4ade80; /* Green for ships */
 }
 
 #ships-container {
@@ -116,4 +131,24 @@ body {
   background-color: #5358a6;
   border-radius: 8px;
   padding: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.ship-shape {
+  display: flex;
+  gap: 2px;
+  background-color: #313244;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.ship-block {
+  width: 30px;
+  height: 30px;
+  background-color: #4ade80;
 }
