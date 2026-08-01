@@ -3,7 +3,9 @@
   https://www.joshwcomeau.com/css/custom-css-reset/
 */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -22,28 +24,96 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-img, picture, video, canvas, svg {
+img,
+picture,
+video,
+canvas,
+svg {
   display: block;
   max-width: 100%;
 }
 
-input, button, textarea, select {
+input,
+button,
+textarea,
+select {
   font: inherit;
 }
 
-p, h1, h2, h3, h4, h5, h6 {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   overflow-wrap: break-word;
 }
 
 p {
   text-wrap: pretty;
 }
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   text-wrap: balance;
 }
 
-#root, #__next {
+#root,
+#__next {
   isolation: isolate;
 }
 
 /*------------ start of styles ------------*/
+
+body {
+  font-family: system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #e3e3ff;
+  color: #212227;
+  padding: 20px;
+}
+
+#status-display {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.boards-container {
+  display: flex;
+  gap: 100px;
+  margin-bottom: 40px;
+}
+
+.board {
+  width: 350px;
+  height: 350px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  background-color: #5358a6;
+  border: 2px solid #313244;
+}
+
+.cell {
+  background-color: #89b4fa;
+  cursor: pointer;
+}
+
+.cell:hover {
+  background-color: #b4befe;
+}
+
+#ships-container {
+  width: 100%;
+  max-width: 800px;
+  min-height: 100px;
+  background-color: #5358a6;
+  border-radius: 8px;
+  padding: 20px;
+}
