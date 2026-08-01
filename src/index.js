@@ -1,4 +1,5 @@
 import './styles.css';
+import './style.css';
 import { createGame } from './game.js';
 
 const game = createGame();
@@ -18,7 +19,9 @@ function renderBoards() {
       const cell = document.createElement('div');
       cell.classList.add('cell');
 
-      if (cellValue === 's') cell.style.backgroundColor = '#639a1f';
+      if (cellValue === 's') cell.classList.add('ship');
+      if (cellValue === 'm') cell.classList.add('miss');
+      if (cellValue === 'h') cell.classList.add('hit');
 
       playerBoardElement.appendChild(cell);
     });
@@ -29,17 +32,52 @@ function renderBoards() {
       const cell = document.createElement('div');
       cell.classList.add('cell');
 
-      // data attributes so I know what cell is pressed
+      if (cellValue === 'm') cell.classList.add('miss');
+      if (cellValue === 'h') cell.classList.add('hit');
+
       cell.dataset.y = y;
       cell.dataset.x = x;
 
-      cell.addEventListener('click', handleAttack);
+      if (cellValue !== 'h' && cellValue !== 'm') {
+        cell.addEventListener('click', handleAttack);
+      } else {
+        cell.style.pointerEvents = 'none';
+      }
 
       cpuBoardElement.appendChild(cell);
     });
   });
 
   updateStatus(state);
+}
+
+function renderShips() {
+  const shipsContainer = document.getElementById('ships-container');
+  shipsContainer.innerHTML = '';
+
+  const shipsToPlace = [
+    { name: 'Carrier', length: 5 },
+    { name: 'Battleship', length: 4 },
+    { name: 'Cruiser', length: 3 },
+    { name: 'Submarine', length: 3 },
+    { name: 'Destroyer', length: 2 },
+  ];
+
+  shipsToPlace.forEach((ship) => {
+    const shipElement = document.createElement('div');
+    shipElement.classList.add('ship-shape');
+
+    shipElement.dataset.length = ship.length;
+    shipElement.dataset.name = ship.name;
+
+    for (let i = 0; i < ship.length; i++) {
+      const block = document.createElement('div');
+      block.classList.add('ship-block');
+      shipElement.appendChild(block);
+    }
+
+    shipsContainer.appendChild(shipElement);
+  });
 }
 
 function handleAttack(e) {
@@ -61,3 +99,4 @@ function updateStatus(state) {
 }
 
 renderBoards();
+renderShips();
