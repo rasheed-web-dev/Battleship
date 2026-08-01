@@ -1,5 +1,4 @@
 import './styles.css';
-import './style.css';
 import { createGame } from './game.js';
 
 const game = createGame();
