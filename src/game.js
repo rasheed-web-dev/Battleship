@@ -34,25 +34,24 @@ export function createGame() {
     Destroyer: 2,
   };
 
-  function setupGameBoards(player1Board, player2Board) {
-    const placeDefaultShips = (board) => {
-      board.place(new Ship(ships.Carrier), 0, 0, true);
-
-      board.place(new Ship(ships.Battleship), 2, 0, false);
-
-      board.place(new Ship(ships.Cruiser), 2, 3, true);
-
-      board.place(new Ship(ships.Submarine), 3, 5, false);
-
-      board.place(new Ship(ships.Destroyer), 6, 2, true);
-    };
-
-    placeDefaultShips(player1Board);
-    placeDefaultShips(player2Board);
+  function setupCPUShips() {
+    player2.board.place(new Ship(ships.Carrier), 0, 0, true);
+    player2.board.place(new Ship(ships.Battleship), 2, 0, false);
+    player2.board.place(new Ship(ships.Cruiser), 2, 3, true);
+    player2.board.place(new Ship(ships.Submarine), 3, 5, false);
+    player2.board.place(new Ship(ships.Destroyer), 6, 2, true);
   }
+  setupCPUShips();
 
-  setupGameBoards(player1.board, player2.board);
-  player1.board.printBoard();
+  function placePlayerShip(length, y, x, isHorizontal) {
+    try {
+      player1.board.place(new Ship(length), y, x, isHorizontal);
+      return true;
+    } catch (error) {
+      console.log(error.message);
+      return false;
+    }
+  }
 
   function attack(y, x) {
     const enemyBoard = currentTurn === player1 ? player2.board : player1.board;
@@ -109,7 +108,7 @@ export function createGame() {
     currentTurn = player1;
     gameOver = false;
 
-    setupGameBoards(player1.board, player2.board);
+    setupCPUShips();
   }
 
   function getState() {
@@ -128,5 +127,6 @@ export function createGame() {
     playRound,
     resetGame,
     getState,
+    placePlayerShip,
   };
 }
